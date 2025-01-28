@@ -1,0 +1,18 @@
+@import url(/styles/components/nav.css);
+@import url(/styles/components/footer_.css);
+#sup_titles
+{
+    margin: 70px;
+}
+
+ input{
+    margin-top: 20px;
+    border-radius: 20px;
+}
+.form input:focus {
+    outline: none;
+    background-color: rgba(240, 239, 238, 0.856);
+    transform: scale(1.1);
+    color: black;
+   
+  }

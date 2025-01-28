@@ -1,0 +1,139 @@
+// //panel ids
+// const input_title=document.getElementById("input_title");
+// const input_realisateur=document.getElementById("input_realisateur");
+// const input_genre=document.getElementById("input_genre");
+// const input_url=document.getElementById("input_url");
+// const input_date=document.getElementById("input_sortie");
+// const ajouter=document.getElementById("ajouter");
+// //index ids
+// const movie_img = document.getElementById("movie_img");
+// const movie_title = document.getElementById("movie_title");
+// const movie_realisateur = document.getElementById("movie_Realisateur");
+// const movie_genre = document.getElementById("movie_genre");
+// const movie_date = document.getElementById("movie_date");
+// const card_flip = document.getElementById("card_flip");
+
+// const suprimer = document.getElementById("suprimer");
+// const update = document.getElementById("mise_a_jour");
+
+
+
+// let movies=[];
+
+// ajouter.addEventListener("click",function()
+
+// {
+//    let movie=
+// {
+   
+//     title:input_title.value,
+//     realisateur:input_realisateur.value,
+//     genre:input_genre.value,
+//     date:input_date.value,
+//     imageurl:input_url.value
+
+// } 
+// console.log(movie)
+// movies.push(movie);
+
+// card_flip.innerHTML=`
+
+// <div class="flip-card-inner">
+//             <div class="flip-card-front">
+//               <img
+//                 src="${movie.imageurl}"
+//                 alt="Avatar"
+//                 style="width: 300px; height: 300px"
+//               />
+//             </div>
+//             <div class="flip-card-back" id="card_back">
+//               <h3 id="movie_title">${movie.title}</h3>
+//               <h5 id="movie_Realisateur">${movie.realisateur}</h5>
+//               <h5 id="movie_genre">${movie.genre}</h5>
+//               <h5 id="movie_date">${movie.date}</h5>
+//               <input
+//                 type="button"
+//                 class="btn btn-danger"
+//                 value="suprimer"
+//                 id="suprimer"
+//               /><br />
+//               <input
+//                 type="button"
+//                 class="btn btn-success"
+//                 value="mise a jour"
+//                 id="mise_a_jour"
+//               />
+//           </div>
+// `
+
+// })
+// Panel IDs
+const input_title = document.getElementById("input_title");
+const input_realisateur = document.getElementById("input_realisateur");
+const input_genre = document.getElementById("input_genre");
+const input_url = document.getElementById("input_url");
+const input_date = document.getElementById("input_sortie");
+const ajouter = document.getElementById("ajouter");
+
+// Index IDs
+const card_flip = document.getElementById("card_flip");
+
+// Load movies from localStorage
+let movies = JSON.parse(localStorage.getItem("movies")) || [];
+
+// Function to render movies
+
+
+// Add movie to the list
+document.addEventListener("DOMContentLoaded", function () {
+    const card_flip = document.getElementById("card_flip");
+
+    if (!card_flip) {
+        console.error("Element with ID 'card_flip' not found!");
+        return;
+    }
+
+    let movies = JSON.parse(localStorage.getItem("movies")) || [];
+
+    function renderMovies() {
+        card_flip.innerHTML = ""; // Clear existing content
+        movies.forEach((movie, index) => {
+            card_flip.innerHTML += `
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="${movie.imageurl}" alt="Movie Poster" style="width: 300px; height: 300px"/>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>${movie.title}</h3>
+                        <h5>Réalisateur: ${movie.realisateur}</h5>
+                        <h5>Genre: ${movie.genre}</h5>
+                        <h5>Date: ${movie.date}</h5>
+                        <button class="btn btn-danger" onclick="deleteMovie(${index})">Supprimer</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function deleteMovie(index) {
+        movies.splice(index, 1); // Remove from array
+        localStorage.setItem("movies", JSON.stringify(movies)); // Update localStorage
+        renderMovies(); // Refresh display
+    }
+
+    renderMovies(); // Call after checking card_flip
+});
+
+
+// Function to delete movie
+function deleteMovie(index) {
+  movies.splice(index, 1); // Remove from array
+  localStorage.setItem("movies", JSON.stringify(movies)); // Update localStorage
+  renderMovies(); // Refresh display
+}
+
+// Initial render on page load
+renderMovies();
+
+
+
