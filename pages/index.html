@@ -6,6 +6,14 @@
     <title>Movies</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="/styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+       <script
+      src="https://kit.fontawesome.com/13885aca87.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light" id="nav">
@@ -25,7 +33,7 @@
             Death Note is a Japanese anime television series based on the manga
             series of the same name written by Tsugumi Ohba and illustrated by
             Takeshi Obata.
-          </p>
+          <br><br><br>
           <button type="button" class="btn btn-danger">More</button>
         </div>
         <div class="col-md-4">
@@ -40,87 +48,42 @@
     </section>
 
     <section class="container mt-5">
-      <h2 class="text-center mb-4">Movies</h2>
+      <h2 class="text-center mb-4" id="sup_titles">Movies</h2>
       <div class="row">
-        <div class="col-md-4">
-          <div class="card bg-dark text-white mb-3">
-            <img
-              src="/images/811fa194c33830def2c7416c05d3e2d6.jpg"
-              alt="Death Note"
-              class="card-img-top"
-              id="img"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Death Note</h5>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="/images/811fa194c33830def2c7416c05d3e2d6.jpg"
+                alt="Avatar"
+                style="width: 300px; height: 300px"
+              />
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card bg-dark text-white mb-3">
-            <img
-              src="/images/6b799c0b4833ef0f9cea9d1f415e5061.jpg"
-              alt="Death Note"
-              class="card-img-top"
-              id="img"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Death Note</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card bg-dark text-white mb-3">
-            <img
-              src="/images/6b799c0b4833ef0f9cea9d1f415e5061.jpg"
-              alt="Death Note"
-              class="card-img-top"
-              id="img"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Death Note</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card bg-dark text-white mb-3">
-            <img
-              src="/images/6b799c0b4833ef0f9cea9d1f415e5061.jpg"
-              alt="Death Note"
-              class="card-img-top"
-              id="img"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Death Note</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card bg-dark text-white mb-3">
-            <img
-              src="/images/6b799c0b4833ef0f9cea9d1f415e5061.jpg"
-              alt="Death Note"
-              class="card-img-top"
-              id="img"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Death Note</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 h" id="card">
-          <div class="card bg-dark text-white mb-3">
-            <img
-              src="/images/6b799c0b4833ef0f9cea9d1f415e5061.jpg"
-              alt="Death Note"
-              class="card-img-top"
-              id="img"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Death Note</h5>
+            <div class="flip-card-back" id="card_back">
+              <h2 id="sup_titles"></h2>>Actions</h2>
+              <input
+                type="button"
+                class="btn btn-danger"
+                value="suprimer"
+              /><br />
+              <input
+                type="button"
+                class="btn btn-success"
+                value="mise a jour"
+              />
             </div>
           </div>
         </div>
       </div>
     </section>
+    <footer>
+      <h2 id="sup_titles">contact us</h2>
+        <div class="social_media">
+            <i class="fa-2xl fa-brands fa-square-facebook"></i>
+            <i class="fa-2xl fa-brands fa-square-x-twitter"></i>
+            <i class="fa-2xl fa-brands fa-square-instagram"></i>
+            <i class="fa-2xl fa-brands fa-linkedin"></i>
+          </div>
+    </footer>
   </body>
 </html>
