@@ -1,46 +1,45 @@
-// panel ids
-const input_title = document.getElementById("input_title");
-const input_realisateur = document.getElementById("input_realisateur");
-const input_genre = document.getElementById("input_genre");
-const input_url = document.getElementById("input_url");
-const input_date = document.getElementById("input_sortie");
-const ajouter = document.getElementById("ajouter");
+document.addEventListener("DOMContentLoaded", function () {
+  const showCard = document.getElementById("showCard");
+  let movies = JSON.parse(localStorage.getItem("movies")) || [];
 
-// index ids
-const movie_img = document.getElementById("movie_img");
-const movie_title = document.getElementById("movie_title");
-const movie_realisateur = document.getElementById("movie_Realisateur");
-const movie_genre = document.getElementById("movie_genre");
-const movie_date = document.getElementById("movie_date");
-const showCard = document.getElementById("showCard");
-const suprimer = document.getElementById("suprimer");
-const update = document.getElementById("mise_a_jour");
-
-let movies = JSON.parse(localStorage.getItem("movies")) || [];
-
-ajouter.addEventListener("click", function () {
-    let movie = {
-        title: input_title.value,
-        realisateur: input_realisateur.value,
-        genre: input_genre.value,
-        date: input_date.value,
-        imageurl: input_url.value
-    };
-    console.log(movie);
-    movies.push(movie);
-    localStorage.setItem("movies", JSON.stringify(movies));
-
+  function displayMovies() {
+    if (!showCard) return;
     showCard.innerHTML = "";
-    for (let i = 0; i < movies.length; i++) {
-        let card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-            <img src="${movies[i].imageurl}" alt="${movies[i].title}">
-            <h2>${movies[i].title}</h2>
-            <p>Realisateur: ${movies[i].realisateur}</p>
-            <p>Genre: ${movies[i].genre}</p>
-            <p>Date: ${movies[i].date}</p>
-        `;
-        showCard.appendChild(card);
-    }
+    movies.forEach((movie, index) => {
+      showCard.insertAdjacentHTML("beforeend", movieCard(movie, index));
+    });
+    deleteMovie();
+  }
+
+  function movieCard(movie, index) {
+    return `
+     <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="${movie.imageurl}" alt="Movie Poster" style="width: 300px; height: 300px" />
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>${movie.title}</h3>
+                        <h5>${movie.realisateur}</h5>
+                        <h5>${movie.genre}</h5>
+                        <h5>${movie.date}</h5>
+                        <button id="suprimer" class="btn btn-danger delete-btn" data-index="${index}">Supprimer</button>
+                        <button id="update" class="btn btn-success update-btn" data-index="${index}">Mettre à jour</button>
+                    </div>
+                </div>
+            </div>`;
+  }
+
+  function deleteMovie() {
+    document.querySelectorAll(".delete-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const index = this.getAttribute("data-index");
+        movies.splice(index, 1);
+        localStorage.setItem("movies", JSON.stringify(movies));
+        displayMovies();
+      });
+    });
+  }
+
+  displayMovies();
 });
