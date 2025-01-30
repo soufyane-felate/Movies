@@ -1,4 +1,7 @@
-// panel.js
+
+// Add Movie Functionality
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const input_title = document.getElementById("input_title");
@@ -7,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const input_url = document.getElementById("input_url");
   const input_date = document.getElementById("input_sortie");
   const ajouter = document.getElementById("ajouter");
-
   let movies = JSON.parse(localStorage.getItem("movies")) || [];
 
   function saveMovies() {
@@ -38,4 +40,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-

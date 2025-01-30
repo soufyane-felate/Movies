@@ -1,60 +1,47 @@
-    // Add event listener for delete button
-    document
-      .getElementById(`suprimer_${index}`)
-      .addEventListener("click", () => {
-        movies.splice(index, 1);
-        localStorage.setItem("movies", JSON.stringify(movies));
-        renderMovies(); 
-      });
+document.addEventListener("DOMContentLoaded", function () {
+  const showCard = document.getElementById("showCard");
+  let movies = JSON.parse(localStorage.getItem("movies")) || [];
 
-    // Add event listener for update button
-    document
-      .getElementById(`mise_a_jour_${index}`)
-      .addEventListener("click", () => {
-       
-        input_title.value = movie.title;
-        input_realisateur.value = movie.realisateur;
-        input_genre.value = movie.genre;
-        input_url.value = movie.imageurl;
-        input_date.value = movie.date;
-
-      });
-
-  // Modify the "ajouter" button to act as an update button
-  ajouter.textContent = "Update Movie";
-  ajouter.onclick = function () {
-    movies[index] = {
-      title: input_title.value,
-      realisateur: input_realisateur.value,
-      genre: input_genre.value,
-      imageurl: input_url.value,
-      date: input_date.value,
-    };
-
-    localStorage.setItem("movies", JSON.stringify(movies));
-    displayMovies();
-    resetForm();
-  };
-}
-
-
-
-
-
-
-
-
-
-
-
- <div class="flip-card-front">
-                <img src="${movie.imageurl}" alt="Movie Poster" style="width: 300px; height: 300px" />
+  function displayMovies() {
+    let display = "";
+    for (let i = 0; i < movies.length; i++) {
+      display += `
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="${movies[i].imageurl}" alt="Movie Poster" style="width: 300px; height: 300px" />
             </div>
             <div class="flip-card-back">
-                <h3>${movie.title}</h3>
-                <h5>${movie.realisateur}</h5>
-                <h5>${movie.genre}</h5>
-                <h5>${movie.date}</h5>
-                <button class="btn btn-danger delete-btn" data-index="${index}">Supprimer</button>
-                <button class="btn btn-success update-btn" data-index="${index}">Mettre à jour</button>
+              <h3>${movies[i].title}</h3>
+              <h5>${movies[i].realisateur}</h5>
+              <h5>${movies[i].genre}</h5>
+              <h5>${movies[i].date}</h5>
+              <button class="btn btn-danger delete-btn" data-index="${i}">Supprimer</button>
+              <button class="btn btn-success update-btn" data-index="${i}">Mettre à jour</button>
             </div>
+          </div>
+        </div>
+      `;
+    }
+    showCard.innerHTML = display;
+    attachDeleteEventListeners();
+  }
+
+  function attachDeleteEventListeners() {
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const index = event.target.getAttribute("data-index");
+        movies.splice(index, 1);
+        saveMovies();
+        displayMovies();
+      });
+    });
+  }
+
+  function saveMovies() {
+    localStorage.setItem("movies", JSON.stringify(movies));
+  }
+
+  displayMovies();
+});
