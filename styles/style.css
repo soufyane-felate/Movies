@@ -9,7 +9,9 @@
 .p {
     height: 250px;
 }
-
+label{
+    color: black;
+}
 /* Flip card */
 .flip-card {
     background-color: transparent;
